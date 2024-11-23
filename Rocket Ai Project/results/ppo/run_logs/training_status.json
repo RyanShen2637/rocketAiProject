@@ -1,0 +1,29 @@
+{
+    "travel": {
+        "checkpoints": [
+            {
+                "steps": 2576,
+                "file_path": "results\\ppo\\travel\\travel-2576.onnx",
+                "reward": -0.4716981132075472,
+                "creation_time": 1732322543.5787444,
+                "auxillary_file_paths": [
+                    "results\\ppo\\travel\\travel-2576.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 2576,
+            "file_path": "results\\ppo\\travel.onnx",
+            "reward": -0.4716981132075472,
+            "creation_time": 1732322543.5787444,
+            "auxillary_file_paths": [
+                "results\\ppo\\travel\\travel-2576.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}

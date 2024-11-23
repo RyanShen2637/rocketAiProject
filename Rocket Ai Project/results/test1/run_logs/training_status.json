@@ -1,0 +1,29 @@
+{
+    "travel": {
+        "checkpoints": [
+            {
+                "steps": 834,
+                "file_path": "results\\test1\\travel\\travel-834.onnx",
+                "reward": 0.375,
+                "creation_time": 1731732826.2328768,
+                "auxillary_file_paths": [
+                    "results\\test1\\travel\\travel-834.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 834,
+            "file_path": "results\\test1\\travel.onnx",
+            "reward": 0.375,
+            "creation_time": 1731732826.2328768,
+            "auxillary_file_paths": [
+                "results\\test1\\travel\\travel-834.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cpu"
+    }
+}
