@@ -417,7 +417,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1608646235}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 549054
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -431,7 +431,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -470,7 +470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    VectorObservationSize: 3
+    VectorObservationSize: 10
     NumStackedVectorObservations: 1
     m_ActionSpec:
       m_NumContinuousActions: 0
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
   m_BehaviorType: 0
-  m_BehaviorName: My Behavior
+  m_BehaviorName: Rocket Capabilities
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
@@ -504,9 +504,13 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
-  target: {fileID: 0}
-  successMaterial: {fileID: 0}
-  failMaterial: {fileID: 0}
+  mainThrust: 10000
+  sideThrust: 500
+  rotationThrust: 500
+  spinThrust: 500
+  target: {fileID: 2125362709}
+  successMaterial: {fileID: 2100000, guid: 54ccbfb6c89fea049b337ad80bce03ce, type: 2}
+  failMaterial: {fileID: 2100000, guid: de3fb5363e92a4f479b8e751ba194899, type: 2}
 --- !u!114 &1608646241
 MonoBehaviour:
   m_ObjectHideFlags: 0
