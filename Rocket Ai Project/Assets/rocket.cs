@@ -24,19 +24,66 @@ public class rocket : Agent
     // Update is called once per frame
     void Update()
     {
-        
+        //Set fail material for failed run
+        // if (this.transform.localPosition.y < target.transform.localPosition.y){
+        //     target.GetComponent<MeshRenderer>().material = failMaterial;
+        //     EndEpisode();
+        // }
+    }
+
+    void FixedUpdate()
+    {
+        // Check if the rocket missed the target
+        if (this.transform.localPosition.y < target.transform.localPosition.y - 10f)
+        {
+            Fail();
+        }
+
+        // Check if the rocket is too far from the target
+        if (Vector3.Distance(this.transform.localPosition, target.localPosition) > 1000f)
+        {
+            Fail();
+        }
+    }
+
+    void Fail()
+    {
+        SetReward(-1f);
+        target.GetComponent<MeshRenderer>().material = failMaterial;
+        EndEpisode();
+    }
+
+    void Success()
+    {
+        SetReward(1f);
+        target.GetComponent<MeshRenderer>().material = successMaterial;
+        EndEpisode();
     }
 
     public override void OnEpisodeBegin()
     {
+        //Reset rocket localPosition
+        this.transform.localPosition = new Vector3(0, 500f, 0);
+
+        // Reset rocket velocity
+        rb.linearVelocity = new Vector3(0, 0, 0);
+
+        // Reset rocket angular velocity
+        rb.angularVelocity = new Vector3(0, 0, 0);
+
+        // Reset rocket rotation
+        this.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+        // Reset target localPosition
+        target.localPosition = new Vector3(0, 0, 0);
 
     }
 
     public override void CollectObservations(VectorSensor sensor)
     {
-        sensor.AddObservation(transform.position); // 3
-        sensor.AddObservation(transform.rotation); // 4
-        sensor.AddObservation(target.position); // 3
+        sensor.AddObservation(transform.localPosition); // 3
+        sensor.AddObservation(transform.localRotation); // 4
+        sensor.AddObservation(target.transform.localPosition); // 3
 
     }
 
@@ -209,6 +256,18 @@ public class rocket : Agent
 
     public void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.tag == "target"){
+
+            // Check the speed of the rocket or if the rocket isn't upright
+            Debug.Log($"Speed: {rb.linearVelocity.magnitude}");
+            if (rb.linearVelocity.magnitude > 0.5f || Mathf.Abs(this.transform.localRotation.z) > 2f)
+            {
+                Fail();
+            }
+            else
+            {
+                Success();
+            }
+        }
     }
 }
