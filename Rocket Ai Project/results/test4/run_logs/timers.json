@@ -1,0 +1,42 @@
+{
+    "name": "root",
+    "metadata": {
+        "timer_format_version": "0.1.0",
+        "start_time_seconds": "1736568468",
+        "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+        "command_line_arguments": "C:\\Users\\ryanr\\OneDrive\\Documents\\GitHub\\rocketAiProject\\Rocket Ai Project\\venv\\Scripts\\mlagents-learn config/config.yaml --run-id=test4 --initialize-from=test3",
+        "mlagents_version": "1.1.0",
+        "mlagents_envs_version": "1.1.0",
+        "communication_protocol_version": "1.5.0",
+        "pytorch_version": "2.2.2+cu121",
+        "numpy_version": "1.23.5",
+        "end_time_seconds": "1736568491"
+    },
+    "total": 22.490120799979195,
+    "count": 1,
+    "self": 0.015651200083084404,
+    "children": {
+        "run_training.setup": {
+            "total": 0.12098469992633909,
+            "count": 1,
+            "self": 0.12098469992633909
+        },
+        "TrainerController.start_learning": {
+            "total": 22.35348489996977,
+            "count": 1,
+            "self": 8.759996853768826e-05,
+            "children": {
+                "TrainerController._reset_env": {
+                    "total": 22.353380399988964,
+                    "count": 1,
+                    "self": 22.353380399988964
+                },
+                "TrainerController._save_models": {
+                    "total": 1.6900012269616127e-05,
+                    "count": 1,
+                    "self": 1.6900012269616127e-05
+                }
+            }
+        }
+    }
+}
