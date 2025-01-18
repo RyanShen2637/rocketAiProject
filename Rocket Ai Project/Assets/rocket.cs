@@ -15,6 +15,10 @@ public class rocket : Agent
 
     private Rigidbody rb;
 
+    private float startTime;
+    private float startHeight;
+    private float targetVelocity = 0.5f;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,28 +46,34 @@ public class rocket : Agent
         // Check if the rocket is too far from the target
         if (Vector3.Distance(this.transform.localPosition, target.localPosition) > 1000f)
         {
-            Fail();
+            Fail(-1.5f);
         }
     }
 
-    void Fail()
+    void Fail(float punishment = -1f)
     {
-        SetReward(-1f);
+        SetReward(punishment);
         target.GetComponent<MeshRenderer>().material = failMaterial;
         EndEpisode();
     }
 
     void Success()
     {
-        SetReward(1f);
+        float time = Time.time - startTime;
+        Debug.Log($"Landed in {time} seconds");
+
+        float additionalReward = (startHeight * 0.1f) / time;
+
+        SetReward(1f + additionalReward);
         target.GetComponent<MeshRenderer>().material = successMaterial;
         EndEpisode();
     }
 
     public override void OnEpisodeBegin()
     {
+        startHeight = 500f;
         //Reset rocket localPosition
-        this.transform.localPosition = new Vector3(0, 500f, 0);
+        this.transform.localPosition = new Vector3(0, startHeight, 0);
 
         // Reset rocket velocity
         rb.linearVelocity = new Vector3(0, 0, 0);
@@ -77,6 +87,9 @@ public class rocket : Agent
         // Reset target localPosition
         target.localPosition = new Vector3(0, 0, 0);
 
+        // Set the start time
+        startTime = Time.time;
+
     }
 
     public override void CollectObservations(VectorSensor sensor)
@@ -84,6 +97,8 @@ public class rocket : Agent
         sensor.AddObservation(transform.localPosition); // 3
         sensor.AddObservation(transform.localRotation); // 4
         sensor.AddObservation(target.transform.localPosition); // 3
+        sensor.AddObservation(targetVelocity); // 1
+        sensor.AddObservation(rb.linearVelocity.magnitude); // 1
 
     }
 
@@ -260,7 +275,7 @@ public class rocket : Agent
 
             // Check the speed of the rocket or if the rocket isn't upright
             Debug.Log($"Speed: {rb.linearVelocity.magnitude}");
-            if (rb.linearVelocity.magnitude > 0.5f || Mathf.Abs(this.transform.localRotation.z) > 2f)
+            if (rb.linearVelocity.magnitude > targetVelocity || Mathf.Abs(this.transform.localRotation.z) > 2f)
             {
                 Fail();
             }
