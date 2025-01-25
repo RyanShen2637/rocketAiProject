@@ -18,6 +18,7 @@ public class rocket : Agent
     private float startTime;
     private float startHeight;
     private float targetVelocity = 0.5f;
+    private float lastHeight = 500f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,11 +49,20 @@ public class rocket : Agent
         {
             Fail(-1.5f);
         }
+
+        // Check if the rocket is rising
+        if (this.transform.localPosition.y > lastHeight)
+        {
+            AddReward(-0.005f);
+        }
+        lastHeight = this.transform.localPosition.y;
     }
 
     void Fail(float punishment = -1f)
     {
-        SetReward(punishment);
+        AddReward(punishment);
+
+        Debug.Log($"Total punishment: {GetCumulativeReward()}");
         target.GetComponent<MeshRenderer>().material = failMaterial;
         EndEpisode();
     }
@@ -64,14 +74,23 @@ public class rocket : Agent
 
         float additionalReward = (startHeight * 0.1f) / time;
 
-        SetReward(1f + additionalReward);
+        AddReward(10f + additionalReward);
+
+        if (GetCumulativeReward() < 0f) {
+            SetReward(0.5f);
+        }
+
+        // Print the total reward accumulated
+        Debug.Log($"Total reward: {GetCumulativeReward()}");
+
         target.GetComponent<MeshRenderer>().material = successMaterial;
         EndEpisode();
     }
 
     public override void OnEpisodeBegin()
     {
-        startHeight = 500f;
+        startHeight = Random.Range(300f, 700f);
+        lastHeight = startHeight;
         //Reset rocket localPosition
         this.transform.localPosition = new Vector3(0, startHeight, 0);
 
