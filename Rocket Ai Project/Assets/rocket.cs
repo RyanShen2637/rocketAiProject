@@ -53,7 +53,7 @@ public class rocket : Agent
         // Check if the rocket is rising
         if (this.transform.localPosition.y > lastHeight)
         {
-            AddReward(-0.005f);
+            AddReward(-0.02f);
         }
         lastHeight = this.transform.localPosition.y;
     }
@@ -74,7 +74,11 @@ public class rocket : Agent
 
         float additionalReward = (startHeight * 0.1f) / time;
 
-        AddReward(10f + additionalReward);
+        float bullseyeCoefficient = Mathf.Clamp(10f - (Vector3.Distance(this.transform.localPosition, target.localPosition) / 5f), 0f, 10f);
+
+        Debug.Log($"Adding reward: 10 + {additionalReward} + {bullseyeCoefficient}");
+
+        AddReward(10f + additionalReward + bullseyeCoefficient);
 
         if (GetCumulativeReward() < 0f) {
             SetReward(0.5f);
@@ -104,7 +108,7 @@ public class rocket : Agent
         this.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
         // Reset target localPosition
-        target.localPosition = new Vector3(0, 0, 0);
+        target.localPosition = new Vector3(Random.Range(-50f, 50f), 0, Random.Range(-50f, 50f));
 
         // Set the start time
         startTime = Time.time;
