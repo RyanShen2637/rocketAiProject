@@ -19,6 +19,7 @@ public class rocket : Agent
     private float startHeight;
     private float targetVelocity = 0.5f;
     private float lastHeight = 500f;
+    private float lastDistance = 1000f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -56,10 +57,21 @@ public class rocket : Agent
             AddReward(-0.02f);
         }
         lastHeight = this.transform.localPosition.y;
+
+        // Check if the rocket is getting closer to the target
+        if (Vector3.Distance(this.transform.localPosition, target.localPosition) > lastDistance)
+        {
+            AddReward(-0.02f);
+        }
+        lastDistance = Vector3.Distance(this.transform.localPosition, target.localPosition);
     }
 
     void Fail(float punishment = -1f)
     {
+        if (GetCumulativeReward() > 0f) {
+            AddReward(-1f * GetCumulativeReward());
+        }
+
         AddReward(punishment);
 
         Debug.Log($"Total punishment: {GetCumulativeReward()}");
@@ -69,20 +81,29 @@ public class rocket : Agent
 
     void Success()
     {
+        if (GetCumulativeReward() < 0f) {
+            AddReward(-1f * GetCumulativeReward());
+        }
+
         float time = Time.time - startTime;
         Debug.Log($"Landed in {time} seconds");
 
+        if (time < 0.5f) {
+            time = 0.5f;
+        }
+
         float additionalReward = (startHeight * 0.1f) / time;
+
+        if (additionalReward > 100f)
+        {
+            additionalReward = 100f;
+        }
 
         float bullseyeCoefficient = Mathf.Clamp(10f - (Vector3.Distance(this.transform.localPosition, target.localPosition) / 5f), 0f, 10f);
 
         Debug.Log($"Adding reward: 10 + {additionalReward} + {bullseyeCoefficient}");
 
         AddReward(10f + additionalReward + bullseyeCoefficient);
-
-        if (GetCumulativeReward() < 0f) {
-            SetReward(0.5f);
-        }
 
         // Print the total reward accumulated
         Debug.Log($"Total reward: {GetCumulativeReward()}");
@@ -95,6 +116,7 @@ public class rocket : Agent
     {
         startHeight = Random.Range(300f, 700f);
         lastHeight = startHeight;
+        lastDistance = Vector3.Distance(this.transform.localPosition, target.localPosition);
         //Reset rocket localPosition
         this.transform.localPosition = new Vector3(0, startHeight, 0);
 
