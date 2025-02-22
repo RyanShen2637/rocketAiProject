@@ -3021,5 +3021,444 @@ C:\Users\ryanr\OneDrive\Documents\GitHub\rocketAiProject\Rocket Ai Project\venv\
 
 ______________________________________________________________________________________________________________________
 
-rocketTest28
+rocketTest28: Layer:2 Num Units: 256
 
+Version information:
+  ml-agents: 1.1.0,
+  ml-agents-envs: 1.1.0,
+  Communicator API: 1.5.0,
+  PyTorch: 2.2.2+cu121
+[INFO] Listening on port 5004. Start training by pressing the Play button in the Unity Editor.
+[INFO] Connected to Unity environment with package version 3.0.0 and communication version 1.5.0
+[INFO] Connected new brain: Rocket Capabilities?team=0
+[INFO] Hyperparameters for behavior name Rocket Capabilities: 
+        trainer_type:   ppo
+        hyperparameters:
+          batch_size:   1024
+          buffer_size:  10240
+          learning_rate:        0.0003
+          beta: 0.005
+          epsilon:      0.2
+          lambd:        0.95
+          num_epoch:    3
+          shared_critic:        False
+          learning_rate_schedule:       linear
+          beta_schedule:        linear
+          epsilon_schedule:     linear
+        checkpoint_interval:    500000
+        network_settings:
+          normalize:    False
+          hidden_units: 256
+          num_layers:   2
+          vis_encode_type:      simple
+          memory:       None
+          goal_conditioning_type:       hyper
+          deterministic:        False
+        reward_signals:
+          extrinsic:
+            gamma:      0.99
+            strength:   1.0
+            network_settings:
+              normalize:        False
+              hidden_units:     128
+              num_layers:       2
+              vis_encode_type:  simple
+              memory:   None
+              goal_conditioning_type:   hyper
+              deterministic:    False
+          gail:
+            gamma:      0.99
+            strength:   0.5
+            network_settings:
+              normalize:        False
+              hidden_units:     128
+              num_layers:       2
+              vis_encode_type:  simple
+              memory:   None
+              goal_conditioning_type:   hyper
+              deterministic:    False
+            learning_rate:      0.0003
+            encoding_size:      None
+            use_actions:        False
+            use_vail:   False
+            demo_path:  rocketRecordings/translation1.demo
+        init_path:      results\rocketTest27\Rocket Capabilities\checkpoint.pt
+        keep_checkpoints:       5
+        even_checkpoints:       False
+        max_steps:      500000
+        time_horizon:   64
+        summary_freq:   20000
+        threaded:       False
+        self_play:      None
+        behavioral_cloning:
+          demo_path:    rocketRecordings/translation1.demo
+          steps:        0
+          strength:     0.5
+          samples_per_update:   0
+          num_epoch:    None
+          batch_size:   None
+[INFO] Initializing from results\rocketTest27\Rocket Capabilities\checkpoint.pt.
+[INFO] Starting training from step 0 and saving to results\rocketTest28\Rocket Capabilities.
+C:\Users\ryanr\OneDrive\Documents\GitHub\rocketAiProject\Rocket Ai Project\venv\lib\site-packages\torch\utils\_device.py:77: UserWarning: The use of `x.T` on tensors of dimension other than 2 to reverse their shape is deprecated and it will throw an error in a future release. Consider `x.mT` to transpose batches of matrices or `x.permute(*torch.arange(x.ndim - 1, -1, -1))` to reverse the dimensions of a tensor. (Triggered internally at ..\aten\src\ATen\native\TensorShape.cpp:3641.)
+  return func(*args, **kwargs)
+[INFO] Rocket Capabilities. Step: 20000. Time Elapsed: 32.147 s. Mean Reward: -2.026. Std of Reward: 10.316. Training.
+[INFO] Rocket Capabilities. Step: 40000. Time Elapsed: 46.367 s. Mean Reward: -9.599. Std of Reward: 16.593. Training.
+[INFO] Rocket Capabilities. Step: 60000. Time Elapsed: 60.499 s. Mean Reward: -6.411. Std of Reward: 10.789. Training.
+[INFO] Rocket Capabilities. Step: 80000. Time Elapsed: 74.277 s. Mean Reward: -30.099. Std of Reward: 25.013. Training.
+[INFO] Rocket Capabilities. Step: 100000. Time Elapsed: 87.828 s. Mean Reward: -24.052. Std of Reward: 27.175. Training.
+[INFO] Rocket Capabilities. Step: 120000. Time Elapsed: 101.307 s. Mean Reward: -33.104. Std of Reward: 13.215. Training.
+[INFO] Rocket Capabilities. Step: 140000. Time Elapsed: 115.736 s. Mean Reward: -23.103. Std of Reward: 2.702. Training.
+[INFO] Rocket Capabilities. Step: 160000. Time Elapsed: 129.886 s. Mean Reward: -19.752. Std of Reward: 7.723. Training.
+[INFO] Rocket Capabilities. Step: 180000. Time Elapsed: 144.403 s. Mean Reward: -3.417. Std of Reward: 6.792. Training.
+[INFO] Rocket Capabilities. Step: 200000. Time Elapsed: 157.881 s. Mean Reward: -15.825. Std of Reward: 15.823. Training.
+[INFO] Rocket Capabilities. Step: 220000. Time Elapsed: 171.903 s. Mean Reward: -11.851. Std of Reward: 14.350. Training.
+[INFO] Rocket Capabilities. Step: 240000. Time Elapsed: 185.663 s. Mean Reward: -26.585. Std of Reward: 20.155. Training.
+[INFO] Rocket Capabilities. Step: 260000. Time Elapsed: 199.054 s. Mean Reward: -33.983. Std of Reward: 25.774. Training.
+[INFO] Rocket Capabilities. Step: 280000. Time Elapsed: 212.457 s. Mean Reward: -37.994. Std of Reward: 21.551. Training.
+[INFO] Rocket Capabilities. Step: 300000. Time Elapsed: 226.137 s. Mean Reward: -28.939. Std of Reward: 18.245. Training.
+[INFO] Rocket Capabilities. Step: 320000. Time Elapsed: 236.995 s. Mean Reward: -27.989. Std of Reward: 20.259. Training.
+[INFO] Rocket Capabilities. Step: 340000. Time Elapsed: 250.616 s. Mean Reward: -29.928. Std of Reward: 17.677. Training.
+[INFO] Rocket Capabilities. Step: 360000. Time Elapsed: 264.773 s. Mean Reward: -22.565. Std of Reward: 20.586. Training.
+[INFO] Rocket Capabilities. Step: 380000. Time Elapsed: 277.947 s. Mean Reward: -22.777. Std of Reward: 20.079. Training.
+[INFO] Rocket Capabilities. Step: 400000. Time Elapsed: 291.952 s. Mean Reward: -18.622. Std of Reward: 21.361. Training.
+[INFO] Rocket Capabilities. Step: 420000. Time Elapsed: 303.291 s. Mean Reward: -13.681. Std of Reward: 20.055. Training.
+[INFO] Rocket Capabilities. Step: 440000. Time Elapsed: 311.803 s. Mean Reward: -19.456. Std of Reward: 20.094. Training.
+[INFO] Rocket Capabilities. Step: 460000. Time Elapsed: 320.148 s. Mean Reward: -19.758. Std of Reward: 24.958. Training.
+[INFO] Rocket Capabilities. Step: 480000. Time Elapsed: 328.446 s. Mean Reward: -16.938. Std of Reward: 20.106. Training.
+[INFO] Rocket Capabilities. Step: 500000. Time Elapsed: 336.627 s. Mean Reward: -20.073. Std of Reward: 25.040. Training.
+[INFO] Exported results\rocketTest28\Rocket Capabilities\Rocket Capabilities-499954.onnx
+[INFO] Exported results\rocketTest28\Rocket Capabilities\Rocket Capabilities-500012.onnx
+[INFO] Copied results\rocketTest28\Rocket Capabilities\Rocket Capabilities-500012.onnx to results\rocketTest28\Rocket Capabilities.onnx.
+
+______________________________________________________________________________________________________________________
+
+rocketTest29: raised num layer to 3 from 2
+
+Version information:
+  ml-agents: 1.1.0,
+  ml-agents-envs: 1.1.0,
+  Communicator API: 1.5.0,
+  PyTorch: 2.2.2+cu121
+[INFO] Listening on port 5004. Start training by pressing the Play button in the Unity Editor.
+[INFO] Connected to Unity environment with package version 3.0.0 and communication version 1.5.0
+[INFO] Connected new brain: Rocket Capabilities?team=0
+[INFO] Hyperparameters for behavior name Rocket Capabilities: 
+        trainer_type:   ppo
+        hyperparameters:
+          batch_size:   1024
+          buffer_size:  10240
+          learning_rate:        0.0003
+          beta: 0.005
+          epsilon:      0.2
+          lambd:        0.95
+          num_epoch:    3
+          shared_critic:        False
+          learning_rate_schedule:       linear
+          beta_schedule:        linear
+          epsilon_schedule:     linear
+        checkpoint_interval:    500000
+        network_settings:
+          normalize:    False
+          hidden_units: 256
+          num_layers:   3
+          vis_encode_type:      simple
+          memory:       None
+          goal_conditioning_type:       hyper
+          deterministic:        False
+        reward_signals:
+          extrinsic:
+            gamma:      0.99
+            strength:   1.0
+            network_settings:
+              normalize:        False
+              hidden_units:     128
+              num_layers:       2
+              vis_encode_type:  simple
+              memory:   None
+              goal_conditioning_type:   hyper
+              deterministic:    False
+          gail:
+            gamma:      0.99
+            strength:   0.5
+            network_settings:
+              normalize:        False
+              hidden_units:     128
+              num_layers:       2
+              vis_encode_type:  simple
+              memory:   None
+              goal_conditioning_type:   hyper
+              deterministic:    False
+            learning_rate:      0.0003
+            encoding_size:      None
+            use_actions:        False
+            use_vail:   False
+            demo_path:  rocketRecordings/translation1.demo
+        init_path:      None
+        keep_checkpoints:       5
+        even_checkpoints:       False
+        max_steps:      500000
+        time_horizon:   64
+        summary_freq:   20000
+        threaded:       False
+        self_play:      None
+        behavioral_cloning:
+          demo_path:    rocketRecordings/translation1.demo
+          steps:        0
+          strength:     0.5
+          samples_per_update:   0
+          num_epoch:    None
+          batch_size:   None
+C:\Users\ryanr\OneDrive\Documents\GitHub\rocketAiProject\Rocket Ai Project\venv\lib\site-packages\torch\utils\_device.py:77: UserWarning: The use of `x.T` on tensors of dimension other than 2 to reverse their shape is deprecated and it will throw an error in a future release. Consider `x.mT` to transpose batches of matrices or `x.permute(*torch.arange(x.ndim - 1, -1, -1))` to reverse the dimensions of a tensor. (Triggered internally at ..\aten\src\ATen\native\TensorShape.cpp:3641.)
+  return func(*args, **kwargs)
+[INFO] Rocket Capabilities. Step: 20000. Time Elapsed: 22.770 s. Mean Reward: -24.069. Std of Reward: 3.214. Training.
+[INFO] Rocket Capabilities. Step: 40000. Time Elapsed: 37.076 s. Mean Reward: -23.020. Std of Reward: 2.488. Training.
+[INFO] Rocket Capabilities. Step: 60000. Time Elapsed: 52.089 s. Mean Reward: -23.668. Std of Reward: 2.690. Training.
+[INFO] Rocket Capabilities. Step: 80000. Time Elapsed: 66.873 s. Mean Reward: -22.931. Std of Reward: 2.671. Training.
+[INFO] Rocket Capabilities. Step: 100000. Time Elapsed: 81.508 s. Mean Reward: -23.088. Std of Reward: 2.574. Training.
+[INFO] Rocket Capabilities. Step: 120000. Time Elapsed: 95.752 s. Mean Reward: -15.062. Std of Reward: 10.937. Training.
+[INFO] Rocket Capabilities. Step: 140000. Time Elapsed: 110.287 s. Mean Reward: -1.175. Std of Reward: 2.235. Training.
+[INFO] Rocket Capabilities. Step: 160000. Time Elapsed: 129.862 s. Mean Reward: -14.491. Std of Reward: 15.451. Training.
+[INFO] Rocket Capabilities. Step: 180000. Time Elapsed: 143.510 s. Mean Reward: -24.260. Std of Reward: 4.510. Training.
+[INFO] Rocket Capabilities. Step: 200000. Time Elapsed: 159.539 s. Mean Reward: -23.470. Std of Reward: 2.648. Training.
+[INFO] Rocket Capabilities. Step: 220000. Time Elapsed: 172.785 s. Mean Reward: -16.928. Std of Reward: 10.520. Training.
+[INFO] Rocket Capabilities. Step: 240000. Time Elapsed: 185.752 s. Mean Reward: -17.885. Std of Reward: 14.396. Training.
+[INFO] Rocket Capabilities. Step: 260000. Time Elapsed: 200.392 s. Mean Reward: -4.241. Std of Reward: 13.041. Training.
+[INFO] Rocket Capabilities. Step: 280000. Time Elapsed: 210.447 s. Mean Reward: -4.847. Std of Reward: 10.832. Training.
+[INFO] Rocket Capabilities. Step: 300000. Time Elapsed: 223.064 s. Mean Reward: -21.519. Std of Reward: 16.310. Training.
+[INFO] Rocket Capabilities. Step: 320000. Time Elapsed: 236.138 s. Mean Reward: -10.051. Std of Reward: 16.200. Training.
+[INFO] Rocket Capabilities. Step: 340000. Time Elapsed: 247.337 s. Mean Reward: 0.202. Std of Reward: 5.846. Training.
+[INFO] Rocket Capabilities. Step: 360000. Time Elapsed: 259.467 s. Mean Reward: -2.557. Std of Reward: 15.403. Training.
+[INFO] Rocket Capabilities. Step: 380000. Time Elapsed: 272.192 s. Mean Reward: -5.387. Std of Reward: 17.716. Training.
+[INFO] Rocket Capabilities. Step: 400000. Time Elapsed: 285.495 s. Mean Reward: -13.495. Std of Reward: 27.685. Training.
+[INFO] Rocket Capabilities. Step: 420000. Time Elapsed: 297.303 s. Mean Reward: 0.596. Std of Reward: 13.145. Training.
+[INFO] Rocket Capabilities. Step: 440000. Time Elapsed: 309.060 s. Mean Reward: 0.009. Std of Reward: 14.502. Training.
+[INFO] Rocket Capabilities. Step: 460000. Time Elapsed: 321.918 s. Mean Reward: -0.972. Std of Reward: 13.570. Training.
+[INFO] Rocket Capabilities. Step: 480000. Time Elapsed: 334.914 s. Mean Reward: -1.709. Std of Reward: 22.645. Training.
+[INFO] Rocket Capabilities. Step: 500000. Time Elapsed: 347.783 s. Mean Reward: -5.525. Std of Reward: 21.859. Training.
+[INFO] Exported results\rocketTest29\Rocket Capabilities\Rocket Capabilities-499965.onnx
+[INFO] Exported results\rocketTest29\Rocket Capabilities\Rocket Capabilities-500029.onnx
+[INFO] Copied results\rocketTest29\Rocket Capabilities\Rocket Capabilities-500029.onnx to results\rocketTest29\Rocket Capabilities.onnx.
+
+______________________________________________________________________________________________________________________
+
+rocketTest30: initialize from 29
+
+Version information:
+  ml-agents: 1.1.0,
+  ml-agents-envs: 1.1.0,
+  Communicator API: 1.5.0,
+  PyTorch: 2.2.2+cu121
+[INFO] Listening on port 5004. Start training by pressing the Play button in the Unity Editor.
+[INFO] Connected to Unity environment with package version 3.0.0 and communication version 1.5.0
+[INFO] Connected new brain: Rocket Capabilities?team=0
+[INFO] Hyperparameters for behavior name Rocket Capabilities: 
+        trainer_type:   ppo
+        hyperparameters:
+          batch_size:   1024
+          buffer_size:  10240
+          learning_rate:        0.0003
+          beta: 0.005
+          epsilon:      0.2
+          lambd:        0.95
+          num_epoch:    3
+          shared_critic:        False
+          learning_rate_schedule:       linear
+          beta_schedule:        linear
+          epsilon_schedule:     linear
+        checkpoint_interval:    500000
+        network_settings:
+          normalize:    False
+          hidden_units: 256
+          num_layers:   3
+          vis_encode_type:      simple
+          memory:       None
+          goal_conditioning_type:       hyper
+          deterministic:        False
+        reward_signals:
+          extrinsic:
+            gamma:      0.99
+            strength:   1.0
+            network_settings:
+              normalize:        False
+              hidden_units:     128
+              num_layers:       2
+              vis_encode_type:  simple
+              memory:   None
+              goal_conditioning_type:   hyper
+              deterministic:    False
+          gail:
+            gamma:      0.99
+            strength:   0.5
+            network_settings:
+              normalize:        False
+              hidden_units:     128
+              num_layers:       2
+              vis_encode_type:  simple
+              memory:   None
+              goal_conditioning_type:   hyper
+              deterministic:    False
+            learning_rate:      0.0003
+            encoding_size:      None
+            use_actions:        False
+            use_vail:   False
+            demo_path:  rocketRecordings/translation1.demo
+        init_path:      results\rocketTest29\Rocket Capabilities\checkpoint.pt
+        keep_checkpoints:       5
+        even_checkpoints:       False
+        max_steps:      500000
+        time_horizon:   64
+        summary_freq:   20000
+        threaded:       False
+        self_play:      None
+        behavioral_cloning:
+          demo_path:    rocketRecordings/translation1.demo
+          steps:        0
+          strength:     0.5
+          samples_per_update:   0
+          num_epoch:    None
+          batch_size:   None
+[INFO] Initializing from results\rocketTest29\Rocket Capabilities\checkpoint.pt.
+[INFO] Starting training from step 0 and saving to results\rocketTest30\Rocket Capabilities.
+C:\Users\ryanr\OneDrive\Documents\GitHub\rocketAiProject\Rocket Ai Project\venv\lib\site-packages\torch\utils\_device.py:77: UserWarning: The use of `x.T` on tensors of dimension other than 2 to reverse their shape is deprecated and it will throw an error in a future release. Consider `x.mT` to transpose batches of matrices or `x.permute(*torch.arange(x.ndim - 1, -1, -1))` to reverse the dimensions of a tensor. (Triggered internally at ..\aten\src\ATen\native\TensorShape.cpp:3641.)
+  return func(*args, **kwargs)
+[INFO] Rocket Capabilities. Step: 20000. Time Elapsed: 23.699 s. Mean Reward: 1.924. Std of Reward: 6.828. Training.
+[INFO] Rocket Capabilities. Step: 40000. Time Elapsed: 36.813 s. Mean Reward: 1.254. Std of Reward: 9.161. Training.
+[INFO] Rocket Capabilities. Step: 60000. Time Elapsed: 50.154 s. Mean Reward: -1.819. Std of Reward: 14.222. Training.
+[INFO] Rocket Capabilities. Step: 80000. Time Elapsed: 63.449 s. Mean Reward: -2.717. Std of Reward: 15.993. Training.
+[INFO] Rocket Capabilities. Step: 100000. Time Elapsed: 75.965 s. Mean Reward: -7.870. Std of Reward: 27.957. Training.
+[INFO] Rocket Capabilities. Step: 120000. Time Elapsed: 89.105 s. Mean Reward: -1.167. Std of Reward: 15.704. Training.
+[INFO] Rocket Capabilities. Step: 140000. Time Elapsed: 101.650 s. Mean Reward: -7.572. Std of Reward: 27.577. Training.
+[INFO] Rocket Capabilities. Step: 160000. Time Elapsed: 114.763 s. Mean Reward: -6.888. Std of Reward: 26.159. Training.
+[INFO] Rocket Capabilities. Step: 180000. Time Elapsed: 127.969 s. Mean Reward: 0.424. Std of Reward: 11.549. Training.
+[INFO] Rocket Capabilities. Step: 200000. Time Elapsed: 141.573 s. Mean Reward: -13.086. Std of Reward: 30.635. Training.
+[INFO] Rocket Capabilities. Step: 220000. Time Elapsed: 155.288 s. Mean Reward: -3.609. Std of Reward: 19.236. Training.
+[INFO] Rocket Capabilities. Step: 240000. Time Elapsed: 168.280 s. Mean Reward: -24.373. Std of Reward: 49.238. Training.
+[INFO] Rocket Capabilities. Step: 260000. Time Elapsed: 180.907 s. Mean Reward: -3.331. Std of Reward: 18.518. Training.
+[INFO] Rocket Capabilities. Step: 280000. Time Elapsed: 193.372 s. Mean Reward: -1.671. Std of Reward: 20.693. Training.
+[INFO] Rocket Capabilities. Step: 300000. Time Elapsed: 206.174 s. Mean Reward: 1.065. Std of Reward: 12.383. Training.
+[INFO] Rocket Capabilities. Step: 320000. Time Elapsed: 218.823 s. Mean Reward: -3.037. Std of Reward: 20.784. Training.
+[INFO] Rocket Capabilities. Step: 340000. Time Elapsed: 229.202 s. Mean Reward: -3.711. Std of Reward: 26.304. Training.
+[INFO] Rocket Capabilities. Step: 360000. Time Elapsed: 241.751 s. Mean Reward: 0.257. Std of Reward: 16.652. Training.
+[INFO] Rocket Capabilities. Step: 380000. Time Elapsed: 255.504 s. Mean Reward: -3.276. Std of Reward: 16.110. Training.
+[INFO] Rocket Capabilities. Step: 400000. Time Elapsed: 271.562 s. Mean Reward: -5.398. Std of Reward: 19.313. Training.
+[INFO] Rocket Capabilities. Step: 420000. Time Elapsed: 281.078 s. Mean Reward: -1.203. Std of Reward: 13.834. Training.
+[INFO] Rocket Capabilities. Step: 440000. Time Elapsed: 290.464 s. Mean Reward: -5.833. Std of Reward: 23.152. Training.
+[INFO] Rocket Capabilities. Step: 460000. Time Elapsed: 299.118 s. Mean Reward: -2.286. Std of Reward: 15.521. Training.
+[INFO] Rocket Capabilities. Step: 480000. Time Elapsed: 307.780 s. Mean Reward: -9.873. Std of Reward: 23.719. Training.
+[INFO] Rocket Capabilities. Step: 500000. Time Elapsed: 316.826 s. Mean Reward: -10.042. Std of Reward: 27.971. Training.
+[INFO] Exported results\rocketTest30\Rocket Capabilities\Rocket Capabilities-499951.onnx
+[INFO] Exported results\rocketTest30\Rocket Capabilities\Rocket Capabilities-500143.onnx
+[INFO] Copied results\rocketTest30\Rocket Capabilities\Rocket Capabilities-500143.onnx to results\rocketTest30\Rocket Capabilities.onnx.
+
+______________________________________________________________________________________________________________________
+
+rocketTest31; added additional fail condition when rockets rise 50m above the lowest height they achieved in that episode
+
+Version information:
+  ml-agents: 1.1.0,
+  ml-agents-envs: 1.1.0,
+  Communicator API: 1.5.0,
+  PyTorch: 2.2.2+cu121
+[INFO] Listening on port 5004. Start training by pressing the Play button in the Unity Editor.
+[INFO] Connected to Unity environment with package version 3.0.0 and communication version 1.5.0
+[INFO] Connected new brain: Rocket Capabilities?team=0
+[INFO] Hyperparameters for behavior name Rocket Capabilities: 
+        trainer_type:   ppo
+        hyperparameters:
+          batch_size:   1024
+          buffer_size:  10240
+          learning_rate:        0.0003
+          beta: 0.005
+          epsilon:      0.2
+          lambd:        0.95
+          num_epoch:    3
+          shared_critic:        False
+          learning_rate_schedule:       linear
+          beta_schedule:        linear
+          epsilon_schedule:     linear
+        checkpoint_interval:    500000
+        network_settings:
+          normalize:    False
+          hidden_units: 256
+          num_layers:   3
+          vis_encode_type:      simple
+          memory:       None
+          goal_conditioning_type:       hyper
+          deterministic:        False
+        reward_signals:
+          extrinsic:
+            gamma:      0.99
+            strength:   1.0
+            network_settings:
+              normalize:        False
+              hidden_units:     128
+              num_layers:       2
+              vis_encode_type:  simple
+              memory:   None
+              goal_conditioning_type:   hyper
+              deterministic:    False
+          gail:
+            gamma:      0.99
+            strength:   0.5
+            network_settings:
+              normalize:        False
+              hidden_units:     128
+              num_layers:       2
+              vis_encode_type:  simple
+              memory:   None
+              goal_conditioning_type:   hyper
+              deterministic:    False
+            learning_rate:      0.0003
+            encoding_size:      None
+            use_actions:        False
+            use_vail:   False
+            demo_path:  rocketRecordings/translation1.demo
+        init_path:      results\rocketTest30\Rocket Capabilities\checkpoint.pt
+        keep_checkpoints:       5
+        even_checkpoints:       False
+        max_steps:      500000
+        time_horizon:   64
+        summary_freq:   20000
+        threaded:       False
+        self_play:      None
+        behavioral_cloning:
+          demo_path:    rocketRecordings/translation1.demo
+          steps:        0
+          strength:     0.5
+          samples_per_update:   0
+          num_epoch:    None
+          batch_size:   None
+[INFO] Initializing from results\rocketTest30\Rocket Capabilities\checkpoint.pt.
+[INFO] Starting training from step 0 and saving to results\rocketTest31\Rocket Capabilities.
+C:\Users\ryanr\OneDrive\Documents\GitHub\rocketAiProject\Rocket Ai Project\venv\lib\site-packages\torch\utils\_device.py:77: UserWarning: The use of `x.T` on tensors of dimension other than 2 to reverse their shape is deprecated and it will throw an error in a future release. Consider `x.mT` to transpose batches of matrices or `x.permute(*torch.arange(x.ndim - 1, -1, -1))` to reverse the dimensions of a tensor. (Triggered internally at ..\aten\src\ATen\native\TensorShape.cpp:3641.)
+  return func(*args, **kwargs)
+[INFO] Rocket Capabilities. Step: 20000. Time Elapsed: 32.383 s. Mean Reward: -2.248. Std of Reward: 9.502. Training.
+[INFO] Rocket Capabilities. Step: 40000. Time Elapsed: 53.603 s. Mean Reward: -3.568. Std of Reward: 8.978. Training.
+[INFO] Rocket Capabilities. Step: 60000. Time Elapsed: 68.145 s. Mean Reward: -0.608. Std of Reward: 8.108. Training.
+[INFO] Rocket Capabilities. Step: 80000. Time Elapsed: 83.035 s. Mean Reward: -1.208. Std of Reward: 9.773. Training.
+[INFO] Rocket Capabilities. Step: 100000. Time Elapsed: 96.021 s. Mean Reward: -2.017. Std of Reward: 10.465. Training.
+[INFO] Rocket Capabilities. Step: 120000. Time Elapsed: 110.710 s. Mean Reward: -0.253. Std of Reward: 11.937. Training.
+[INFO] Rocket Capabilities. Step: 140000. Time Elapsed: 125.544 s. Mean Reward: 0.292. Std of Reward: 8.958. Training.
+[INFO] Rocket Capabilities. Step: 160000. Time Elapsed: 138.987 s. Mean Reward: 0.931. Std of Reward: 12.451. Training.
+[INFO] Rocket Capabilities. Step: 180000. Time Elapsed: 152.029 s. Mean Reward: -1.888. Std of Reward: 9.217. Training.
+[INFO] Rocket Capabilities. Step: 200000. Time Elapsed: 165.745 s. Mean Reward: -0.187. Std of Reward: 10.899. Training.
+[INFO] Rocket Capabilities. Step: 220000. Time Elapsed: 180.511 s. Mean Reward: -3.849. Std of Reward: 14.435. Training.
+[INFO] Rocket Capabilities. Step: 240000. Time Elapsed: 194.668 s. Mean Reward: 0.647. Std of Reward: 10.673. Training.
+[INFO] Rocket Capabilities. Step: 260000. Time Elapsed: 208.222 s. Mean Reward: 0.652. Std of Reward: 10.446. Training.
+[INFO] Rocket Capabilities. Step: 280000. Time Elapsed: 220.550 s. Mean Reward: 0.641. Std of Reward: 7.041. Training.
+[INFO] Rocket Capabilities. Step: 300000. Time Elapsed: 234.140 s. Mean Reward: 1.002. Std of Reward: 7.892. Training.
+[INFO] Rocket Capabilities. Step: 320000. Time Elapsed: 246.695 s. Mean Reward: 1.511. Std of Reward: 8.566. Training.
+[INFO] Rocket Capabilities. Step: 340000. Time Elapsed: 257.012 s. Mean Reward: 0.301. Std of Reward: 9.237. Training.
+[INFO] Rocket Capabilities. Step: 360000. Time Elapsed: 270.694 s. Mean Reward: 2.807. Std of Reward: 8.965. Training.
+[INFO] Rocket Capabilities. Step: 380000. Time Elapsed: 280.637 s. Mean Reward: 1.136. Std of Reward: 7.508. Training.
+[INFO] Rocket Capabilities. Step: 400000. Time Elapsed: 289.249 s. Mean Reward: 2.763. Std of Reward: 8.252. Training.
+[INFO] Rocket Capabilities. Step: 420000. Time Elapsed: 297.878 s. Mean Reward: -0.059. Std of Reward: 7.706. Training.
+[INFO] Rocket Capabilities. Step: 440000. Time Elapsed: 306.484 s. Mean Reward: 3.172. Std of Reward: 9.556. Training.
+[INFO] Rocket Capabilities. Step: 460000. Time Elapsed: 315.302 s. Mean Reward: 2.775. Std of Reward: 8.705. Training.
+[INFO] Rocket Capabilities. Step: 480000. Time Elapsed: 323.748 s. Mean Reward: 2.464. Std of Reward: 9.580. Training.
+[INFO] Rocket Capabilities. Step: 500000. Time Elapsed: 332.538 s. Mean Reward: 2.856. Std of Reward: 9.002. Training.
+[INFO] Exported results\rocketTest31\Rocket Capabilities\Rocket Capabilities-499940.onnx
+[INFO] Exported results\rocketTest31\Rocket Capabilities\Rocket Capabilities-500004.onnx
+[INFO] Copied results\rocketTest31\Rocket Capabilities\Rocket Capabilities-500004.onnx to results\rocketTest31\Rocket Capabilities.onnx.
+
+______________________________________________________________________________________________________________________

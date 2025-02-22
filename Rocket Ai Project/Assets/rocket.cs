@@ -5,6 +5,7 @@ using Unity.MLAgents.Sensors;
 
 public class rocket : Agent
 {
+    public trainingStats stats;
     public float mainThrust = 10000f;
     public float sideThrust = 500f;
     public float rotationThrust = 500f;
@@ -19,6 +20,7 @@ public class rocket : Agent
     private float startHeight;
     private float targetVelocity = 0.5f;
     private float lastHeight = 500f;
+    private float lowestHeight = 500f;
     private float lastDistance = 1000f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -52,18 +54,25 @@ public class rocket : Agent
         }
 
         // Check if the rocket is rising
-        if (this.transform.localPosition.y > lastHeight)
+        if (this.transform.localPosition.y >= lastHeight)
         {
             AddReward(-0.02f);
         }
         lastHeight = this.transform.localPosition.y;
 
         // Check if the rocket is getting closer to the target
-        if (Vector3.Distance(this.transform.localPosition, target.localPosition) > lastDistance)
+        if (Vector3.Distance(this.transform.localPosition, target.localPosition) >= lastDistance)
         {
             AddReward(-0.02f);
         }
         lastDistance = Vector3.Distance(this.transform.localPosition, target.localPosition);
+
+        // If the rocket rises too much, fail
+        if (this.transform.localPosition.y > lowestHeight + 50f)
+        {
+            Fail(-2f);
+        }
+        lowestHeight = Mathf.Min(lowestHeight, this.transform.localPosition.y);
     }
 
     void Fail(float punishment = -1f)
@@ -76,6 +85,12 @@ public class rocket : Agent
 
         Debug.Log($"Total punishment: {GetCumulativeReward()}");
         target.GetComponent<MeshRenderer>().material = failMaterial;
+
+        if (stats != null)
+        {
+            stats.failures++;
+        }
+
         EndEpisode();
     }
 
@@ -109,12 +124,19 @@ public class rocket : Agent
         Debug.Log($"Total reward: {GetCumulativeReward()}");
 
         target.GetComponent<MeshRenderer>().material = successMaterial;
+
+        if (stats != null)
+        {
+            stats.successes++;
+        }
+
         EndEpisode();
     }
 
     public override void OnEpisodeBegin()
     {
         startHeight = Random.Range(300f, 700f);
+        lowestHeight = startHeight;
         lastHeight = startHeight;
         lastDistance = Vector3.Distance(this.transform.localPosition, target.localPosition);
         //Reset rocket localPosition
@@ -320,6 +342,11 @@ public class rocket : Agent
 
             // Check the speed of the rocket or if the rocket isn't upright
             Debug.Log($"Speed: {rb.linearVelocity.magnitude}");
+
+            if (rb.linearVelocity.magnitude > targetVelocity && stats != null) {
+                stats.crashCount++;
+            }
+
             if (rb.linearVelocity.magnitude > targetVelocity || Mathf.Abs(this.transform.localRotation.z) > 2f)
             {
                 Fail();

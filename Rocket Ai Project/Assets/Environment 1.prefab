@@ -5126,6 +5126,7 @@ MonoBehaviour:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
   MaxStep: 0
+  stats: {fileID: 0}
   mainThrust: 10000000
   sideThrust: 1500000
   rotationThrust: 2000000
