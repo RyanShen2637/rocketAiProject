@@ -44,12 +44,14 @@ public class rocket : Agent
         // Check if the rocket missed the target
         if (this.transform.localPosition.y < target.transform.localPosition.y - 10f)
         {
+            stats.missCount++;
             Fail();
         }
 
         // Check if the rocket is too far from the target
         if (Vector3.Distance(this.transform.localPosition, target.localPosition) > 1000f)
         {
+            stats.farCount++;
             Fail(-1.5f);
         }
 
@@ -70,6 +72,7 @@ public class rocket : Agent
         // If the rocket rises too much, fail
         if (this.transform.localPosition.y > lowestHeight + 50f)
         {
+            stats.riseCount++;
             Fail(-2f);
         }
         lowestHeight = Mathf.Min(lowestHeight, this.transform.localPosition.y);
