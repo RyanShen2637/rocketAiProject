@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
@@ -56,9 +57,11 @@ public class rocket : Agent
         }
 
         // Check if the rocket is rising
-        if (this.transform.localPosition.y >= lastHeight)
+        if (this.transform.localPosition.y > lastHeight)
         {
-            AddReward(-0.02f);
+            stats.riseCount++;
+            Fail(-7f);
+            // AddReward(-0.02f);
         }
         lastHeight = this.transform.localPosition.y;
 
@@ -70,12 +73,12 @@ public class rocket : Agent
         lastDistance = Vector3.Distance(this.transform.localPosition, target.localPosition);
 
         // If the rocket rises too much, fail
-        if (this.transform.localPosition.y > lowestHeight + 50f)
-        {
-            stats.riseCount++;
-            Fail(-2f);
-        }
-        lowestHeight = Mathf.Min(lowestHeight, this.transform.localPosition.y);
+        // if (this.transform.localPosition.y > lowestHeight + 50f)
+        // {
+        //     stats.riseCount++;
+        //     Fail(-2f);
+        // }
+        // lowestHeight = Mathf.Min(lowestHeight, this.transform.localPosition.y);
     }
 
     void Fail(float punishment = -1f)
@@ -117,7 +120,11 @@ public class rocket : Agent
             additionalReward = 100f;
         }
 
-        float bullseyeCoefficient = Mathf.Clamp(10f - (Vector3.Distance(this.transform.localPosition, target.localPosition) / 5f), 0f, 10f);
+        // Formula: (40 * (x^-0.5)) - 5; and then clamped between 0 and 10
+        float bullseyeCoefficient = Mathf.Clamp(40.0f * ((float)Math.Pow(Vector3.Distance(this.transform.localPosition, target.localPosition), -0.5f)) - 5f, 0f, 10f);
+
+        Debug.Log($"Distance from center: {Vector3.Distance(this.transform.localPosition, target.localPosition)}");
+        Debug.Log($"Bullseye coefficient: {bullseyeCoefficient}");
 
         Debug.Log($"Adding reward: 10 + {additionalReward} + {bullseyeCoefficient}");
 
@@ -133,12 +140,14 @@ public class rocket : Agent
             stats.successes++;
         }
 
+        lastHeight = 1000f;
+
         EndEpisode();
     }
 
     public override void OnEpisodeBegin()
     {
-        startHeight = Random.Range(300f, 700f);
+        startHeight = UnityEngine.Random.Range(300f, 700f);
         lowestHeight = startHeight;
         lastHeight = startHeight;
         lastDistance = Vector3.Distance(this.transform.localPosition, target.localPosition);
@@ -155,7 +164,7 @@ public class rocket : Agent
         this.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
         // Reset target localPosition
-        target.localPosition = new Vector3(Random.Range(-50f, 50f), 0, Random.Range(-50f, 50f));
+        target.localPosition = new Vector3(UnityEngine.Random.Range(-50f, 50f), 0, UnityEngine.Random.Range(-50f, 50f));
 
         // Set the start time
         startTime = Time.time;

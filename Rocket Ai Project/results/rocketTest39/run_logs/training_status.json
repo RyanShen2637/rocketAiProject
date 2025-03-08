@@ -2,31 +2,31 @@
     "Rocket Capabilities": {
         "checkpoints": [
             {
-                "steps": 499963,
-                "file_path": "results\\rocketTest39\\Rocket Capabilities\\Rocket Capabilities-499963.onnx",
-                "reward": -6.139392937674667,
-                "creation_time": 1741401532.7074778,
+                "steps": 499993,
+                "file_path": "results\\rocketTest39\\Rocket Capabilities\\Rocket Capabilities-499993.onnx",
+                "reward": 0.26791377862294513,
+                "creation_time": 1741405739.6613736,
                 "auxillary_file_paths": [
-                    "results\\rocketTest39\\Rocket Capabilities\\Rocket Capabilities-499963.pt"
+                    "results\\rocketTest39\\Rocket Capabilities\\Rocket Capabilities-499993.pt"
                 ]
             },
             {
-                "steps": 500155,
-                "file_path": "results\\rocketTest39\\Rocket Capabilities\\Rocket Capabilities-500155.onnx",
-                "reward": -6.139392937674667,
-                "creation_time": 1741401532.7946308,
+                "steps": 500057,
+                "file_path": "results\\rocketTest39\\Rocket Capabilities\\Rocket Capabilities-500057.onnx",
+                "reward": 0.26791377862294513,
+                "creation_time": 1741405739.7394688,
                 "auxillary_file_paths": [
-                    "results\\rocketTest39\\Rocket Capabilities\\Rocket Capabilities-500155.pt"
+                    "results\\rocketTest39\\Rocket Capabilities\\Rocket Capabilities-500057.pt"
                 ]
             }
         ],
         "final_checkpoint": {
-            "steps": 500155,
+            "steps": 500057,
             "file_path": "results\\rocketTest39\\Rocket Capabilities.onnx",
-            "reward": -6.139392937674667,
-            "creation_time": 1741401532.7946308,
+            "reward": 0.26791377862294513,
+            "creation_time": 1741405739.7394688,
             "auxillary_file_paths": [
-                "results\\rocketTest39\\Rocket Capabilities\\Rocket Capabilities-500155.pt"
+                "results\\rocketTest39\\Rocket Capabilities\\Rocket Capabilities-500057.pt"
             ]
         }
     },
