@@ -164,7 +164,7 @@ public class rocket : Agent
         this.transform.localRotation = Quaternion.Euler(0, 0, 0);
 
         // Reset target localPosition
-        target.localPosition = new Vector3(UnityEngine.Random.Range(-50f, 50f), 0, UnityEngine.Random.Range(-50f, 50f));
+        target.localPosition = new Vector3(UnityEngine.Random.Range(-150f, 150f), 0, UnityEngine.Random.Range(-150f, 150f));
 
         // Set the start time
         startTime = Time.time;
@@ -194,6 +194,92 @@ public class rocket : Agent
         {
             rb.AddRelativeForce(Vector3.up * mainThrust);
         }
+
+
+        // Translation Validation Layer
+        float x_distance = transform.localPosition.x - target.transform.localPosition.x;
+        float z_distance = transform.localPosition.z - target.transform.localPosition.z;
+
+        float x_velocity = rb.linearVelocity.x;
+        float z_velocity = rb.linearVelocity.z;
+
+        // translation 1 = W pressed; z goes up
+        // translation 2 = W+D pressed; z goes up and x goes up
+        // translation 3 = D pressed; x goes up
+        // translation 4 = S+D pressed; z goes down and x goes up
+        // translation 5 = S pressed; z goes down
+        // translation 6 = S+A pressed; z goes down and x goes down
+        // translation 7 = A pressed; x goes down
+        // translation 8 = W+A pressed; z goes up and x goes down
+        
+        // bool useDiagonals = true;
+        // if (x_distance < 10 || z_distance < 10) {
+        //     useDiagonals = false;
+        // }
+
+        char x_thruster = ' ';
+        char z_thruster = ' ';
+
+        if (transform.localPosition.x > target.transform.localPosition.x) {
+            // objectively, A needs to be pressed to bring x_distance down
+            x_thruster = 'A';
+
+            if (x_velocity < -10) {
+                x_thruster = 'D';
+            }
+        } else {
+            // objectively, D needs to be pressed to bring x_distance up
+            x_thruster = 'D';
+
+            if (x_velocity > 10) {
+                x_thruster = 'A';
+            }
+        }
+
+        if (transform.localPosition.z > target.transform.localPosition.z) {
+            // objectively, S needs to be pressed to bring z_distance down
+            z_thruster = 'S';
+
+            if (z_velocity < -10) {
+                z_thruster = 'W';
+            }
+        } else {
+            // objectively, W needs to be pressed to bring z_distance up
+            z_thruster = 'W';
+
+            if (z_velocity > 10) {
+                z_thruster = 'S';
+            }
+        }
+
+        if (x_thruster == 'A' && z_thruster == 'W') {
+            translation = 8; // northwest
+        } else if (x_thruster == 'D' && z_thruster == 'W') {
+            translation = 2; // northeast
+        } else if (x_thruster == 'D' && z_thruster == 'S') {
+            translation = 4; // southeast
+        } else if (x_thruster == 'A' && z_thruster == 'S') {
+            translation = 6; // southwest
+        }
+
+        if (translation == 8) {
+            if (Mathf.Abs(x_distance) < 10 && Mathf.Abs(x_velocity) < 10) {
+                if (translation == 8 || translation == 2) {
+                    translation = 1; // north
+                } else if (translation == 6 || translation == 4) {
+                    translation = 5; // south
+                }
+            } else if (Mathf.Abs(z_distance) < 10 && Mathf.Abs(z_velocity) < 10) {
+                if (translation == 8 || translation == 6) {
+                    translation = 7; // west
+                } else if (translation == 2 || translation == 4) {
+                    translation = 3; // east
+                }
+            }
+
+
+        }
+
 
         // control translation
         if (translation == 1) // north

@@ -24,6 +24,7 @@ public class trainingStats : MonoBehaviour
     {
         statsText.text = $"Successes: {successes}\n" +
             $"Failures: {failures}\n" +
+            $"Total: {successes + failures}\n" +
             $"Accuracy: {(successes / ((successes > 0 || failures > 0) ?(successes + failures * 1.0f) : 1.0f)) * 100}%\n" +
             $"Crashes: {crashCount}\n" +
             $"Misses: {missCount}\n" +
