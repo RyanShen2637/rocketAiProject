@@ -57,13 +57,17 @@ public class rocket : Agent
         }
 
         // Check if the rocket is rising
+        Debug.Log($"Last height: {lastHeight}, Current height: {this.transform.localPosition.y}");
         if (this.transform.localPosition.y > lastHeight + 5f)
         {
             stats.riseCount++;
             Fail(-7f);
             // AddReward(-0.02f);
         }
-        lastHeight = this.transform.localPosition.y;
+        if (this.transform.localPosition.y < lastHeight) {
+            lastHeight = this.transform.localPosition.y;
+        }
+        
 
         // Check if the rocket is getting closer to the target
         if (Vector3.Distance(this.transform.localPosition, target.localPosition) >= lastDistance)
