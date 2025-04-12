@@ -1,0 +1,47 @@
+{
+    "Rocket Capabilities": {
+        "checkpoints": [
+            {
+                "steps": 473790,
+                "file_path": "results\\rocketTest47\\Rocket Capabilities\\Rocket Capabilities-473790.onnx",
+                "reward": 22.115886688232422,
+                "creation_time": 1744428497.9013348,
+                "auxillary_file_paths": [
+                    "results\\rocketTest47\\Rocket Capabilities\\Rocket Capabilities-473790.pt"
+                ]
+            },
+            {
+                "steps": 499983,
+                "file_path": "results\\rocketTest47\\Rocket Capabilities\\Rocket Capabilities-499983.onnx",
+                "reward": -5.140600174665451,
+                "creation_time": 1744428744.5959501,
+                "auxillary_file_paths": [
+                    "results\\rocketTest47\\Rocket Capabilities\\Rocket Capabilities-499983.pt"
+                ]
+            },
+            {
+                "steps": 500042,
+                "file_path": "results\\rocketTest47\\Rocket Capabilities\\Rocket Capabilities-500042.onnx",
+                "reward": -4.159137849807739,
+                "creation_time": 1744428744.8424256,
+                "auxillary_file_paths": [
+                    "results\\rocketTest47\\Rocket Capabilities\\Rocket Capabilities-500042.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 500042,
+            "file_path": "results\\rocketTest47\\Rocket Capabilities.onnx",
+            "reward": -4.159137849807739,
+            "creation_time": 1744428744.8424256,
+            "auxillary_file_paths": [
+                "results\\rocketTest47\\Rocket Capabilities\\Rocket Capabilities-500042.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}

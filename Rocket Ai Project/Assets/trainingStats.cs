@@ -11,6 +11,7 @@ public class trainingStats : MonoBehaviour
     public int missCount;
     public int farCount;
     public int riseCount;
+    private float averageHeightAtRise;
     public int crashCount;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,6 +30,19 @@ public class trainingStats : MonoBehaviour
             $"Crashes: {crashCount}\n" +
             $"Misses: {missCount}\n" +
             $"Fars: {farCount}\n" +
-            $"Rises: {riseCount}\n";
+            $"Rises: {riseCount}\n" +
+            $"Average Height at Rise: {averageHeightAtRise}\n m";
+    }
+
+    public void updateRiseHeightAverage(float height)
+    {
+        if (riseCount > 0)
+        {
+            averageHeightAtRise = ((averageHeightAtRise * (riseCount - 1)) + height) / riseCount;
+        }
+        else
+        {
+            averageHeightAtRise = height;
+        }
     }
 }

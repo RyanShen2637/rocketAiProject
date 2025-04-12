@@ -57,11 +57,12 @@ public class rocket : Agent
         }
 
         // Check if the rocket is rising
-        Debug.Log($"Last height: {lastHeight}, Current height: {this.transform.localPosition.y}");
-        if (this.transform.localPosition.y > lastHeight + 5f)
+        // Debug.Log($"Last height: {lastHeight}, Current height: {this.transform.localPosition.y}");
+        if (this.transform.localPosition.y > lastHeight + 2f)
         {
             stats.riseCount++;
-            Fail(-7f);
+            stats.updateRiseHeightAverage(this.transform.localPosition.y);
+            Fail(-15f);
             // AddReward(-0.02f);
         }
         if (this.transform.localPosition.y < lastHeight) {
@@ -192,6 +193,12 @@ public class rocket : Agent
         int translation = actions.DiscreteActions[1];
         int rotation = actions.DiscreteActions[2];
         int spin = actions.DiscreteActions[3];
+
+        // DEBUG: if the rocket velocity is >= 0, then shut off main thruster
+        // if (rb.linearVelocity.y >=0)
+        // {
+        //     mainThruster = 0;
+        // }
 
         // control main thruster
         if (mainThruster == 1)
