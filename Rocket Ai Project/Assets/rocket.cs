@@ -3,9 +3,16 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using UnityEngine.UI;
+using TMPro;
 
 public class rocket : Agent
 {
+    [Header("Spawn Settings")]
+    public TMP_InputField yDistance;
+    public TMP_InputField xDistance;
+    public TMP_InputField zDistance;
+    [Header("Rocket Settings")]
     public trainingStats stats;
     public float mainThrust = 10000f;
     public float sideThrust = 500f;
@@ -153,11 +160,32 @@ public class rocket : Agent
     public override void OnEpisodeBegin()
     {
         startHeight = UnityEngine.Random.Range(300f, 700f);
+
+        // if the content of the yDistanceField is not empty, use it
+        if (yDistance.text != "")
+        {
+            startHeight = float.Parse(yDistance.text);
+        }
+
         lowestHeight = startHeight;
         lastHeight = startHeight;
         lastDistance = Vector3.Distance(this.transform.localPosition, target.localPosition);
+
+        float startX = 0;
+        float startZ = 0;
+        // if the content of the xDistanceField is not empty, use it
+        if (xDistance.text != "")
+        {
+            startX = float.Parse(xDistance.text);
+        }
+        // if the content of the zDistanceField is not empty, use it
+        if (zDistance.text != "")
+        {
+            startZ = float.Parse(zDistance.text);
+        }
+
         //Reset rocket localPosition
-        this.transform.localPosition = new Vector3(0, startHeight, 0);
+        this.transform.localPosition = new Vector3(startX, startHeight, startZ);
 
         // Reset rocket velocity
         rb.linearVelocity = new Vector3(0, 0, 0);
