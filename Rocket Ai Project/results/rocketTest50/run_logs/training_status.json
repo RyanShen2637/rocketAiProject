@@ -1,0 +1,38 @@
+{
+    "Rocket Capabilities": {
+        "checkpoints": [
+            {
+                "steps": 499973,
+                "file_path": "results\\rocketTest50\\Rocket Capabilities\\Rocket Capabilities-499973.onnx",
+                "reward": 5.278103807033637,
+                "creation_time": 1745633317.2102113,
+                "auxillary_file_paths": [
+                    "results\\rocketTest50\\Rocket Capabilities\\Rocket Capabilities-499973.pt"
+                ]
+            },
+            {
+                "steps": 500037,
+                "file_path": "results\\rocketTest50\\Rocket Capabilities\\Rocket Capabilities-500037.onnx",
+                "reward": 5.278103807033637,
+                "creation_time": 1745633317.344485,
+                "auxillary_file_paths": [
+                    "results\\rocketTest50\\Rocket Capabilities\\Rocket Capabilities-500037.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 500037,
+            "file_path": "results\\rocketTest50\\Rocket Capabilities.onnx",
+            "reward": 5.278103807033637,
+            "creation_time": 1745633317.344485,
+            "auxillary_file_paths": [
+                "results\\rocketTest50\\Rocket Capabilities\\Rocket Capabilities-500037.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.1.0",
+        "torch_version": "2.2.2+cu121"
+    }
+}
