@@ -169,7 +169,7 @@ public class rocket : Agent
 
         lowestHeight = startHeight;
         lastHeight = startHeight;
-        lastDistance = Vector3.Distance(this.transform.localPosition, target.localPosition);
+        
 
         float startX = 0;
         float startZ = 0;
@@ -184,8 +184,11 @@ public class rocket : Agent
             startZ = float.Parse(zDistance.text);
         }
 
-        //Reset rocket localPosition
+        // Reset rocket localPosition
         this.transform.localPosition = new Vector3(startX, startHeight, startZ);
+
+        // Reset last distance
+        lastDistance = Vector3.Distance(this.transform.localPosition, target.localPosition);
 
         // Reset rocket velocity
         rb.linearVelocity = new Vector3(0, 0, 0);

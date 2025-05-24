@@ -31,7 +31,7 @@ public class trainingStats : MonoBehaviour
             $"Misses: {missCount}\n" +
             $"Fars: {farCount}\n" +
             $"Rises: {riseCount}\n" +
-            $"Average Height at Rise: {averageHeightAtRise}\n m";
+            $"Average Height at Rise: {averageHeightAtRise} m";
     }
 
     public void updateRiseHeightAverage(float height)
