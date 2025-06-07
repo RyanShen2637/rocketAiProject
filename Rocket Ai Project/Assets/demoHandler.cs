@@ -10,7 +10,12 @@ public class demoHandler : MonoBehaviour
     public Slider slider;
     public orbitalCamera camera;
     public TextMeshProUGUI sliderValueText;
+
+    // Button Color Fields
+    public Color selectedButtonColor = Color.green;
+    public Color unselectedButtonColor = Color.white;
     int currentCameraIndex = 0;
+    Transform currentRocket;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,31 +33,51 @@ public class demoHandler : MonoBehaviour
         {
             if (Input.GetKeyDown((KeyCode)(49 + i)))
             {
-                // Debug.Log("Key " + (i + 1) + " pressed");
-                // find the rocket child in the selected environment
-                Transform rocket = environments[i].transform.Find("SpaceX - Falcon 9");
-                currentCameraIndex = i;
-
-                // // Set the button corresponding to the index to be selected
-                // for (int j = 0; j < cameraButtons.Count; j++)
-                // {
-                //     if (i == j){
-                //         cameraButtons[j].Select();
-                //     }
-                //     else
-                //     {
-                //         cameraButtons[j].OnDeselect(null);
-                //     }
-                // }
-
-
-                // Debug.Log("Rocket: " + rocket.name); // Debug log to check the name of the rocket
-                // assign it to the target field of the camera
-                camera.target = rocket;
+                SelectCamera(i);
             }
         }
 
-        cameraButtons[currentCameraIndex].Select();
+        for (int i = 0; i < cameraButtons.Count; i++)
+        {
+            cameraButtons[i].colors = new ColorBlock
+            {
+                normalColor = unselectedButtonColor,
+                highlightedColor = unselectedButtonColor,
+                pressedColor = unselectedButtonColor,
+                selectedColor = unselectedButtonColor,
+                disabledColor = unselectedButtonColor,
+                colorMultiplier = 1f
+            };
+        }
+
+        cameraButtons[currentCameraIndex].colors = new ColorBlock
+        {
+            normalColor = selectedButtonColor,
+            highlightedColor = unselectedButtonColor,
+            pressedColor = selectedButtonColor,
+            selectedColor = selectedButtonColor,
+            disabledColor = unselectedButtonColor,
+            colorMultiplier = 1f
+        };
+    }
+
+    public void SelectCamera(int index)
+    {
+        currentRocket = environments[index].transform.Find("SpaceX - Falcon 9");
+        currentCameraIndex = index;
+        camera.target = currentRocket;
+    }
+
+    public void ToggleAIControl()
+    {
+        if (currentRocket != null)
+        {
+            var rocketControls = currentRocket.GetComponent<rocket>();
+            if (aiControl != null)
+            {
+                rocketControls.ToggleAIControl();
+            }
+        }
     }
 
     public void SpawnEnvironments(int amount)

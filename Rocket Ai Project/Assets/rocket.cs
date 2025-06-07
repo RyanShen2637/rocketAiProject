@@ -8,6 +8,8 @@ using TMPro;
 
 public class rocket : Agent
 {
+    [Header("Control Settings")]
+    public bool aiControlled = true;
     [Header("Spawn Settings")]
     public TMP_InputField yDistance;
     public TMP_InputField xDistance;
@@ -110,6 +112,12 @@ public class rocket : Agent
         }
 
         EndEpisode();
+    }
+
+    public void ToggleAIControl()
+    {
+        aiControlled = !aiControlled;
+        Debug.Log($"AI Control: {aiControlled}");
     }
 
     void Success()
@@ -475,106 +483,109 @@ public class rocket : Agent
             actions[3] = 0;
         }
 
-        // Vertical Validation Layer
-        float y_distance = transform.localPosition.y - target.transform.localPosition.y;
-        float y_velocity = rb.linearVelocity.y;
+        if (aiControlled) {
+            // Vertical Validation Layer
+            float y_distance = transform.localPosition.y - target.transform.localPosition.y;
+            float y_velocity = rb.linearVelocity.y;
 
-        float horizontal_magnitude = Mathf.Sqrt(Mathf.Pow(transform.localPosition.x - target.transform.localPosition.x, 2) + Mathf.Pow(transform.localPosition.z - target.transform.localPosition.z, 2));
-        float distance_coefficient = 1/75f * horizontal_magnitude + 1;
-        // Debug.Log($"{Mathf.Pow(y_distance, 2)} becomes {1/2000f * Mathf.Pow(y_distance, 2)}");
-        float current_falling_limit = (1/distance_coefficient) * 1/600f * Mathf.Pow(y_distance, 2) + targetVelocity;
-        // Debug.Log($"Current falling limit: {-current_falling_limit}, Current y velocity: {y_velocity}, Current y distance: {y_distance}");
-        if (rb.linearVelocity.y >= 0) {
-            actions[0] = 0;
-        } else {
-            if (y_velocity < -current_falling_limit) {
-                actions[0] = 1;
+            float horizontal_magnitude = Mathf.Sqrt(Mathf.Pow(transform.localPosition.x - target.transform.localPosition.x, 2) + Mathf.Pow(transform.localPosition.z - target.transform.localPosition.z, 2));
+            float distance_coefficient = 1/75f * horizontal_magnitude + 1;
+            // Debug.Log($"{Mathf.Pow(y_distance, 2)} becomes {1/2000f * Mathf.Pow(y_distance, 2)}");
+            float current_falling_limit = (1/distance_coefficient) * 1/600f * Mathf.Pow(y_distance, 2) + targetVelocity;
+            // Debug.Log($"Current falling limit: {-current_falling_limit}, Current y velocity: {y_velocity}, Current y distance: {y_distance}");
+            if (rb.linearVelocity.y >= 0) {
+                actions[0] = 0;
+            } else {
+                if (y_velocity < -current_falling_limit) {
+                    actions[0] = 1;
+                }
             }
-        }
 
-        // Translation Validation Layer
-        float x_distance = transform.localPosition.x - target.transform.localPosition.x;
-        float z_distance = transform.localPosition.z - target.transform.localPosition.z;
+            // Translation Validation Layer
+            float x_distance = transform.localPosition.x - target.transform.localPosition.x;
+            float z_distance = transform.localPosition.z - target.transform.localPosition.z;
 
-        float x_velocity = rb.linearVelocity.x;
-        float z_velocity = rb.linearVelocity.z;
+            float x_velocity = rb.linearVelocity.x;
+            float z_velocity = rb.linearVelocity.z;
 
-        // translation 1 = W pressed; z goes up
-        // translation 2 = W+D pressed; z goes up and x goes up
-        // translation 3 = D pressed; x goes up
-        // translation 4 = S+D pressed; z goes down and x goes up
-        // translation 5 = S pressed; z goes down
-        // translation 6 = S+A pressed; z goes down and x goes down
-        // translation 7 = A pressed; x goes down
-        // translation 8 = W+A pressed; z goes up and x goes down
-        
-        // bool useDiagonals = true;
-        // if (x_distance < 10 || z_distance < 10) {
-        //     useDiagonals = false;
-        // }
+            // translation 1 = W pressed; z goes up
+            // translation 2 = W+D pressed; z goes up and x goes up
+            // translation 3 = D pressed; x goes up
+            // translation 4 = S+D pressed; z goes down and x goes up
+            // translation 5 = S pressed; z goes down
+            // translation 6 = S+A pressed; z goes down and x goes down
+            // translation 7 = A pressed; x goes down
+            // translation 8 = W+A pressed; z goes up and x goes down
+            
+            // bool useDiagonals = true;
+            // if (x_distance < 10 || z_distance < 10) {
+            //     useDiagonals = false;
+            // }
 
-        char x_thruster = ' ';
-        char z_thruster = ' ';
+            char x_thruster = ' ';
+            char z_thruster = ' ';
 
-        if (transform.localPosition.x > target.transform.localPosition.x) {
-            // objectively, A needs to be pressed to bring x_distance down
-            x_thruster = 'A';
-
-            if (x_velocity < ((Mathf.Abs(x_distance) > 25f) ? -10 : -1)) {
-                x_thruster = 'D';
-            }
-        } else {
-            // objectively, D needs to be pressed to bring x_distance up
-            x_thruster = 'D';
-
-            if (x_velocity > ((Mathf.Abs(x_distance) > 25f) ? 10 : 1)) {
+            if (transform.localPosition.x > target.transform.localPosition.x) {
+                // objectively, A needs to be pressed to bring x_distance down
                 x_thruster = 'A';
+
+                if (x_velocity < ((Mathf.Abs(x_distance) > 25f) ? -10 : -1)) {
+                    x_thruster = 'D';
+                }
+            } else {
+                // objectively, D needs to be pressed to bring x_distance up
+                x_thruster = 'D';
+
+                if (x_velocity > ((Mathf.Abs(x_distance) > 25f) ? 10 : 1)) {
+                    x_thruster = 'A';
+                }
             }
-        }
 
-        if (transform.localPosition.z > target.transform.localPosition.z) {
-            // objectively, S needs to be pressed to bring z_distance down
-            z_thruster = 'S';
-
-            if (z_velocity < ((Mathf.Abs(x_distance) > 25f) ? -10 : -1)) {
-                z_thruster = 'W';
-            }
-        } else {
-            // objectively, W needs to be pressed to bring z_distance up
-            z_thruster = 'W';
-
-            if (z_velocity > ((Mathf.Abs(z_distance) > 25f) ? 10 : 1)) {
+            if (transform.localPosition.z > target.transform.localPosition.z) {
+                // objectively, S needs to be pressed to bring z_distance down
                 z_thruster = 'S';
-            }
-        }
 
-        if (x_thruster == 'A' && z_thruster == 'W') {
-            actions[1] = 8; // northwest
-        } else if (x_thruster == 'D' && z_thruster == 'W') {
-            actions[1] = 2; // northeast
-        } else if (x_thruster == 'D' && z_thruster == 'S') {
-            actions[1] = 4; // southeast
-        } else if (x_thruster == 'A' && z_thruster == 'S') {
-            actions[1] = 6; // southwest
-        }
-
-        if (actions[1] == 8) {
-            if (Mathf.Abs(x_distance) < 10 && Mathf.Abs(x_velocity) < 10) {
-                if (actions[1] == 8 || actions[1] == 2) {
-                    actions[1] = 1; // north
-                } else if (actions[1] == 6 || actions[1] == 4) {
-                    actions[1] = 5; // south
+                if (z_velocity < ((Mathf.Abs(x_distance) > 25f) ? -10 : -1)) {
+                    z_thruster = 'W';
                 }
-            } else if (Mathf.Abs(z_distance) < 10 && Mathf.Abs(z_velocity) < 10) {
-                if (actions[1] == 8 || actions[1] == 6) {
-                    actions[1] = 7; // west
-                } else if (actions[1] == 2 || actions[1] == 4) {
-                    actions[1] = 3; // east
+            } else {
+                // objectively, W needs to be pressed to bring z_distance up
+                z_thruster = 'W';
+
+                if (z_velocity > ((Mathf.Abs(z_distance) > 25f) ? 10 : 1)) {
+                    z_thruster = 'S';
                 }
             }
 
+            if (x_thruster == 'A' && z_thruster == 'W') {
+                actions[1] = 8; // northwest
+            } else if (x_thruster == 'D' && z_thruster == 'W') {
+                actions[1] = 2; // northeast
+            } else if (x_thruster == 'D' && z_thruster == 'S') {
+                actions[1] = 4; // southeast
+            } else if (x_thruster == 'A' && z_thruster == 'S') {
+                actions[1] = 6; // southwest
+            }
 
+            if (actions[1] == 8) {
+                if (Mathf.Abs(x_distance) < 10 && Mathf.Abs(x_velocity) < 10) {
+                    if (actions[1] == 8 || actions[1] == 2) {
+                        actions[1] = 1; // north
+                    } else if (actions[1] == 6 || actions[1] == 4) {
+                        actions[1] = 5; // south
+                    }
+                } else if (Mathf.Abs(z_distance) < 10 && Mathf.Abs(z_velocity) < 10) {
+                    if (actions[1] == 8 || actions[1] == 6) {
+                        actions[1] = 7; // west
+                    } else if (actions[1] == 2 || actions[1] == 4) {
+                        actions[1] = 3; // east
+                    }
+                }
+
+
+            }
         }
+        
     }
 
     public void OnCollisionEnter(Collision collision)
