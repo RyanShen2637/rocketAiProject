@@ -73,7 +73,7 @@ public class demoHandler : MonoBehaviour
         if (currentRocket != null)
         {
             var rocketControls = currentRocket.GetComponent<rocket>();
-            if (aiControl != null)
+            if (rocketControls != null)
             {
                 rocketControls.ToggleAIControl();
             }
