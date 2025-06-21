@@ -10,6 +10,7 @@ public class rocket : Agent
 {
     [Header("Control Settings")]
     public bool aiControlled = true;
+    public bool selectedCamera = false;
     [Header("Spawn Settings")]
     public TMP_InputField yDistance;
     public TMP_InputField xDistance;
@@ -483,7 +484,7 @@ public class rocket : Agent
             actions[3] = 0;
         }
 
-        if (aiControlled) {
+        if (aiControlled || (!aiControlled && !selectedCamera)) {
             // Vertical Validation Layer
             float y_distance = transform.localPosition.y - target.transform.localPosition.y;
             float y_velocity = rb.linearVelocity.y;
