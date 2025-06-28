@@ -19,9 +19,13 @@ public class demoHandler : MonoBehaviour
 
     [Header("Experiment Fields")]
     public TMP_InputField gravityInputField;
+    private float defaultGravityValue = 9.81f; // Default gravity value
     public TMP_InputField dragInputField;
+    private float defaultDragValue = 0.001293f; // Default drag value
     public TMP_InputField massInputField;
+    private float defaultMassValue = 549054f; // Default mass value
     public TMP_InputField thrustInputField;
+    private float defaultThrustValue = 10000000f; // Default thrust value
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -76,7 +80,12 @@ public class demoHandler : MonoBehaviour
     public void OnGravityChanged()
     {
         // Change the global gravity value
-        if (float.TryParse(gravityInputField.text, out float gravityValue))
+        if (gravityInputField.text == "")
+        {
+            Physics.gravity = new Vector3(0, -defaultGravityValue, 0);
+            Debug.Log($"Gravity set to: {Physics.gravity}");
+        }
+        else if (float.TryParse(gravityInputField.text, out float gravityValue))
         {
             Physics.gravity = new Vector3(0, -gravityValue, 0);
             Debug.Log($"Gravity set to: {Physics.gravity}");
@@ -90,16 +99,103 @@ public class demoHandler : MonoBehaviour
     public void OnDragChanged()
     {
         // change the drag of all rocket rigidbodies
+        if (dragInputField.text == "")
+        {
+            foreach (var env in environments)
+            {
+                var rockets = env.GetComponentsInChildren<rocket>();
+                foreach (var rocket in rockets)
+                {
+                    var rb = rocket.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        rb.linearDamping = defaultDragValue;
+                        Debug.Log($"Drag set to: {defaultDragValue} for rocket in {env.name}");
+                    }
+                }
+            }
+        }
+        else if (float.TryParse(dragInputField.text, out float dragValue)) {
+            foreach (var env in environments)
+            {
+                var rockets = env.GetComponentsInChildren<rocket>();
+                foreach (var rocket in rockets)
+                {
+                    var rb = rocket.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        rb.linearDamping = dragValue;
+                        Debug.Log($"Drag set to: {dragValue} for rocket in {env.name}");
+                    }
+                }
+            }
+        }
     }
 
     public void OnMassChanged()
     {
-        // change the mass of all rocket rigidbodies
+        // change the mass of all rocket rigidbodies (int)
+        if (massInputField.text == "")
+        {
+            foreach (var env in environments)
+            {
+                var rockets = env.GetComponentsInChildren<rocket>();
+                foreach (var rocket in rockets)
+                {
+                    var rb = rocket.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        rb.mass = defaultMassValue;
+                        Debug.Log($"Mass set to: {defaultMassValue} for rocket in {env.name}");
+                    }
+                }
+            }
+        }
+        else if (int.TryParse(massInputField.text, out int massValue))
+        {
+            foreach (var env in environments)
+            {
+                var rockets = env.GetComponentsInChildren<rocket>();
+                foreach (var rocket in rockets)
+                {
+                    var rb = rocket.GetComponent<Rigidbody>();
+                    if (rb != null)
+                    {
+                        rb.mass = massValue;
+                        Debug.Log($"Mass set to: {massValue} for rocket in {env.name}");
+                    }
+                }
+            }
+        }
     }
 
     public void OnThrustChanged()
     {
         // change the mainThrust of all rocket scripts
+        if (thrustInputField.text == "")
+        {
+            foreach (var env in environments)
+            {
+                var rockets = env.GetComponentsInChildren<rocket>();
+                foreach (var rocket in rockets)
+                {
+                    rocket.mainThrust = defaultThrustValue;
+                    Debug.Log($"Thrust set to: {defaultThrustValue} for rocket in {env.name}");
+                }
+            }
+        }
+        else if (int.TryParse(thrustInputField.text, out int thrustValue))
+        {
+            foreach (var env in environments)
+            {
+                var rockets = env.GetComponentsInChildren<rocket>();
+                foreach (var rocket in rockets)
+                {
+                    rocket.mainThrust = thrustValue;
+                    Debug.Log($"Thrust set to: {thrustValue} for rocket in {env.name}");
+                }
+            }
+        }
     }
 
     public void SelectCamera(int index)

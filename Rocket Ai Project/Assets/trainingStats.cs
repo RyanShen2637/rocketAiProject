@@ -32,6 +32,12 @@ public class trainingStats : MonoBehaviour
             $"Fars: {farCount}\n" +
             $"Rises: {riseCount}\n" +
             $"Average Height at Rise: {averageHeightAtRise} m";
+
+        if (successes + failures == 300)
+        {
+            Debug.Log($"Successes: {successes}, Failures: {failures}, Total: {successes + failures}, Accuracy: {(successes / ((successes > 0 || failures > 0) ?(successes + failures * 1.0f) : 1.0f)) * 100}%\n");
+            Debug.Log($"Crashes: {crashCount}, Misses: {missCount}, Fars: {farCount}, Rises: {riseCount}, Average Height at Rise: {averageHeightAtRise} m");
+        }
     }
 
     public void updateRiseHeightAverage(float height)

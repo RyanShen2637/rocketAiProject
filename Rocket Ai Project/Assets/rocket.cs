@@ -104,7 +104,7 @@ public class rocket : Agent
 
         AddReward(punishment);
 
-        Debug.Log($"Total punishment: {GetCumulativeReward()}");
+        // Debug.Log($"Total punishment: {GetCumulativeReward()}");
         target.GetComponent<MeshRenderer>().material = failMaterial;
 
         if (stats != null)
@@ -128,7 +128,7 @@ public class rocket : Agent
         }
 
         float time = Time.time - startTime;
-        Debug.Log($"Landed in {time} seconds");
+        // Debug.Log($"Landed in {time} seconds");
 
         if (time < 0.5f) {
             time = 0.5f;
@@ -144,15 +144,15 @@ public class rocket : Agent
         // Formula: (40 * (x^-0.5)) - 5; and then clamped between 0 and 10
         float bullseyeCoefficient = Mathf.Clamp(40.0f * ((float)Math.Pow(Vector3.Distance(this.transform.localPosition, target.localPosition), -0.5f)) - 5f, 0f, 10f);
 
-        Debug.Log($"Distance from center: {Vector3.Distance(this.transform.localPosition, target.localPosition)}");
-        Debug.Log($"Bullseye coefficient: {bullseyeCoefficient}");
+        // Debug.Log($"Distance from center: {Vector3.Distance(this.transform.localPosition, target.localPosition)}");
+        // Debug.Log($"Bullseye coefficient: {bullseyeCoefficient}");
 
-        Debug.Log($"Adding reward: 10 + {additionalReward} + {bullseyeCoefficient}");
+        // Debug.Log($"Adding reward: 10 + {additionalReward} + {bullseyeCoefficient}");
 
         AddReward(10f + additionalReward + bullseyeCoefficient);
 
         // Print the total reward accumulated
-        Debug.Log($"Total reward: {GetCumulativeReward()}");
+        // Debug.Log($"Total reward: {GetCumulativeReward()}");
 
         target.GetComponent<MeshRenderer>().material = successMaterial;
 
@@ -594,7 +594,7 @@ public class rocket : Agent
         if (collision.gameObject.tag == "target"){
 
             // Check the speed of the rocket or if the rocket isn't upright
-            Debug.Log($"Speed: {rb.linearVelocity.y}");
+            // Debug.Log($"Speed: {rb.linearVelocity.y}");
 
             if (rb.linearVelocity.y > targetVelocity && stats != null) {
                 stats.crashCount++;
