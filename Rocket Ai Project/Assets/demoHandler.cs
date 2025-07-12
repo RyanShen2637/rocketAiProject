@@ -1,10 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class demoHandler : MonoBehaviour
 {
+    public GameObject pausePanel;
     public List<GameObject> environments = new List<GameObject>();
     public List<Button> cameraButtons = new List<Button>();
     public Slider slider;
@@ -30,6 +32,7 @@ public class demoHandler : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        Time.timeScale = 1f; // Ensure the game is running at normal speed
         slider.onValueChanged.AddListener(delegate { SpawnEnvironments((int)slider.value); });
         slider.value = 9;
         sliderValueText.text = $"Environments: {slider.value}";
@@ -75,6 +78,31 @@ public class demoHandler : MonoBehaviour
             disabledColor = unselectedButtonColor,
             colorMultiplier = 1f
         };
+
+        // Toggle pause panel with Escape key
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pausePanel.activeSelf)
+            {
+                pausePanel.SetActive(false);
+                Time.timeScale = 1f; // Resume the game
+            }
+            else
+            {
+                pausePanel.SetActive(true);
+                Time.timeScale = 0f; // Pause the game
+            }
+        }
+    }
+
+    // Scene management methods
+    public void ReturnToTitle()
+    {
+        SceneManager.LoadScene("Title Scene");
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void OnGravityChanged()

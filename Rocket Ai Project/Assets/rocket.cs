@@ -199,6 +199,11 @@ public class rocket : Agent
         // Reset last distance
         lastDistance = Vector3.Distance(this.transform.localPosition, target.localPosition);
 
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+
         // Reset rocket velocity
         rb.linearVelocity = new Vector3(0, 0, 0);
 
