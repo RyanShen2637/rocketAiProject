@@ -6,6 +6,10 @@ using TMPro;
 
 public class demoHandler : MonoBehaviour
 {
+    [Header("God Variables")]
+    public double timeScale = 1.0; // Default time scale
+    float currentTimeScale = 1.0f; // Current time scale
+    [Header("UI Elements")]
     public GameObject pausePanel;
     public List<GameObject> environments = new List<GameObject>();
     public List<Button> cameraButtons = new List<Button>();
@@ -47,6 +51,12 @@ public class demoHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (timeScale != currentTimeScale)
+        {
+            Time.timeScale = (float)timeScale;
+            currentTimeScale = (float)timeScale;
+        }
+
         // Detect pressing keys 1-9
         for (int i = 0; i < 9; i++)
         {

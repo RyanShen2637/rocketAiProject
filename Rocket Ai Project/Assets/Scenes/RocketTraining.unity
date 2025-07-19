@@ -7052,6 +7052,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5929860006016c4e9bae89f2cea39dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeScale: 1
   pausePanel: {fileID: 1504651744}
   environments:
   - {fileID: 921050550}
