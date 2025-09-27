@@ -24,8 +24,12 @@ public class rocket : Agent
     public Transform target;
     public Material successMaterial;
     public Material failMaterial;
+    public float fuelAmount = 13600f; // typical range at landing is 9000-13600
+    float originalFuelAmount = 13600f;
+    public float fuelBurnRate = 322f;
 
     private Rigidbody rb;
+    private float originalMass;
 
     private float startTime;
     private float startHeight;
@@ -38,6 +42,8 @@ public class rocket : Agent
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        originalMass = rb.mass;
+        originalFuelAmount = fuelAmount;
     }
 
     // Update is called once per frame
@@ -168,6 +174,8 @@ public class rocket : Agent
 
     public override void OnEpisodeBegin()
     {
+        fuelAmount = originalFuelAmount;
+        rb.mass = originalMass;
         startHeight = UnityEngine.Random.Range(300f, 700f);
 
         // if the content of the yDistanceField is not empty, use it
@@ -231,6 +239,19 @@ public class rocket : Agent
 
     }
 
+    bool CanUseThruster()
+    {
+        fuelAmount -= fuelBurnRate * 0.1f / 2f;
+        
+        if (fuelAmount > 0f) {
+            rb.mass -= fuelBurnRate * 0.1f / 2f;
+            return true;
+        } else {
+            fuelAmount = 0f;
+            return false;
+        }
+    }
+
     public override void OnActionReceived(ActionBuffers actions)
     {
         // discrete action space
@@ -248,7 +269,7 @@ public class rocket : Agent
         // control main thruster
         if (mainThruster == 1)
         {
-            rb.AddRelativeForce(Vector3.up * mainThrust);
+            if (CanUseThruster()) rb.AddRelativeForce(Vector3.up * mainThrust);
         }
 
 
@@ -340,32 +361,32 @@ public class rocket : Agent
         // control translation
         if (translation == 1) // north
         {
-            rb.AddRelativeForce(Vector3.forward * sideThrust);
+            if (CanUseThruster()) rb.AddRelativeForce(Vector3.forward * sideThrust);
         } else if (translation == 2) // northeast
         {
-            rb.AddRelativeForce(Vector3.forward * sideThrust);
-            rb.AddRelativeForce(Vector3.right * sideThrust);
+            if (CanUseThruster()) rb.AddRelativeForce(Vector3.forward * sideThrust);
+            if (CanUseThruster()) rb.AddRelativeForce(Vector3.right * sideThrust);
         } else if (translation == 3) // east
         {
-            rb.AddRelativeForce(Vector3.right * sideThrust);
+            if (CanUseThruster()) rb.AddRelativeForce(Vector3.right * sideThrust);
         } else if (translation == 4) // southeast
         {
-            rb.AddRelativeForce(Vector3.back * sideThrust);
-            rb.AddRelativeForce(Vector3.right * sideThrust);
+            if (CanUseThruster()) rb.AddRelativeForce(Vector3.back * sideThrust);
+            if (CanUseThruster()) rb.AddRelativeForce(Vector3.right * sideThrust);
         } else if (translation == 5) // south
         {
-            rb.AddRelativeForce(Vector3.back * sideThrust);
+            if (CanUseThruster()) rb.AddRelativeForce(Vector3.back * sideThrust);
         } else if (translation == 6) // southwest
         {
-            rb.AddRelativeForce(Vector3.back * sideThrust);
-            rb.AddRelativeForce(Vector3.left * sideThrust);
+            if (CanUseThruster()) rb.AddRelativeForce(Vector3.back * sideThrust);
+            if (CanUseThruster()) rb.AddRelativeForce(Vector3.left * sideThrust);
         } else if (translation == 7) // west
         {
-            rb.AddRelativeForce(Vector3.left * sideThrust);
+            if (CanUseThruster()) rb.AddRelativeForce(Vector3.left * sideThrust);
         } else if (translation == 8) // northwest
         {
-            rb.AddRelativeForce(Vector3.forward * sideThrust);
-            rb.AddRelativeForce(Vector3.left * sideThrust);
+            if (CanUseThruster()) rb.AddRelativeForce(Vector3.forward * sideThrust);
+            if (CanUseThruster()) rb.AddRelativeForce(Vector3.left * sideThrust);
         }
 
         // control rotation
