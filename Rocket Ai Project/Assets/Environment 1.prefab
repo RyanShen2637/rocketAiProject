@@ -5248,8 +5248,8 @@ MonoBehaviour:
   target: {fileID: 3159173467075370432}
   successMaterial: {fileID: 2100000, guid: 54ccbfb6c89fea049b337ad80bce03ce, type: 2}
   failMaterial: {fileID: 2100000, guid: de3fb5363e92a4f479b8e751ba194899, type: 2}
-  fuelAmount: 13600
-  fuelBurnRate: 270
+  fuelAmount: 14400
+  fuelBurnRate: 2450
 --- !u!114 &339722999554391533
 MonoBehaviour:
   m_ObjectHideFlags: 0

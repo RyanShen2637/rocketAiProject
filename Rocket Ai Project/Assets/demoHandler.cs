@@ -17,6 +17,9 @@ public class demoHandler : MonoBehaviour
     public orbitalCamera camera;
     public TextMeshProUGUI sliderValueText;
 
+    public Toggle aiControlToggle;
+    public Toggle fuelToggle;
+
     // Button Color Fields
     public Color selectedButtonColor = Color.green;
     public Color unselectedButtonColor = Color.white;
@@ -265,6 +268,16 @@ public class demoHandler : MonoBehaviour
         {
             var rocketControls = currentRocket.GetComponent<rocket>();
             rocketControls?.ToggleAIControl();
+        }
+    }
+
+    public void ToggleFuel()
+    {
+        Debug.Log("Toggling Fuel: ", currentRocket);
+        if (currentRocket != null)
+        {
+            var rocketControls = currentRocket.GetComponent<rocket>();
+            rocketControls?.ToggleFuel();
         }
     }
 

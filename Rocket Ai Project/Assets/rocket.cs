@@ -9,7 +9,9 @@ using TMPro;
 public class rocket : Agent
 {
     [Header("Control Settings")]
+    public GameObject demoHandler;
     public bool aiControlled = true;
+    public bool fuel = false;
     public bool selectedCamera = false;
     [Header("Spawn Settings")]
     public TMP_InputField yDistance;
@@ -38,6 +40,8 @@ public class rocket : Agent
     private float lowestHeight = 500f;
     private float lastDistance = 1000f;
 
+    private bool updatingUI = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -54,6 +58,23 @@ public class rocket : Agent
         //     target.GetComponent<MeshRenderer>().material = failMaterial;
         //     EndEpisode();
         // }
+
+        // When camera is selected, update the UI toggles to match my state
+        if (selectedCamera && demoHandler != null)
+        {
+            var demoHandlerScript = demoHandler.GetComponent<demoHandler>();
+            if (demoHandlerScript != null)
+            {
+                updatingUI = true;
+
+                if (demoHandlerScript.aiControlToggle.isOn != aiControlled)
+                    demoHandlerScript.aiControlToggle.isOn = aiControlled;
+                if (demoHandlerScript.fuelToggle.isOn != fuel)
+                    demoHandlerScript.fuelToggle.isOn = fuel;
+
+                updatingUI = false;
+            }
+        }
     }
 
     void FixedUpdate()
@@ -123,8 +144,16 @@ public class rocket : Agent
 
     public void ToggleAIControl()
     {
+        if (updatingUI) return;
         aiControlled = !aiControlled;
         Debug.Log($"AI Control: {aiControlled}");
+    }
+
+    public void ToggleFuel()
+    {
+        if (updatingUI) return;
+        fuel = !fuel;
+        Debug.Log($"Fuel: {fuel}");
     }
 
     void Success()
@@ -241,6 +270,10 @@ public class rocket : Agent
 
     bool CanUseThruster()
     {
+        if (!fuel) {
+            return true;
+        }
+
         fuelAmount -= fuelBurnRate * 0.1f / 2f;
         
         if (fuelAmount > 0f) {
